@@ -6,7 +6,6 @@ typedef struct {
   double imag;
 } ComplexNumber_C;
 
-
 int main() {
 
     //Create instance of a complex number
@@ -21,9 +20,17 @@ int main() {
 
     // TASK:
     // Create another complex number y
+    //ComplexNumber_C y = {.real = 0.5, .imag = 0.5};
+
     // Calculate the complex sum of p and q and store in y
+    ComplexNumber_C y = {.real = 0.0, .imag = 0.0};
+    y.real = p.real + q.real;
+    y.imag = p.imag + q.real;
+
     // Use printf to display as a complex number (hint: you need two placeholders)
-    
+    printf("Complex sum: %f %f\n", y.real, y.imag);
+
     while (true) {
+        //printf("Complex sum: %f %f", y.real, y.imag);
     }
 }

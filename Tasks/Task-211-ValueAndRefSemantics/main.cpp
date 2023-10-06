@@ -11,19 +11,23 @@ int main() {
 
     //Create instance of a complex number
     ComplexNumber_C p = {2.0, 3.0};
+    printf("1\n");
     printf("p = %f + j%f\n", p.real, p.imag);
     
     //Create another 
     ComplexNumber_C q = {0.0, 0.0};
+    printf("2\n");
     printf("q = %f + j%f\n", q.real, q.imag);
 
     // 1 - Assign one to another
     q = p;
+    printf("3\n");
     printf("q = %f + j%f\n", q.real, q.imag);
 
     // 2 - Change p. Is q affected?
     p.real = -1.0;
     p.imag = -2.0;
+    printf("4\n");
     printf("p = %f + j%f\n", p.real, p.imag);
     printf("q = %f + j%f\n", q.real, q.imag);
 
@@ -34,6 +38,7 @@ int main() {
     ptrP->real = 200.0;
 
     // Are either p and q affected? Why?
+    printf("5\n");
     printf("p = %f + j%f\n", p.real, p.imag);
     printf("q = %f + j%f\n", q.real, q.imag);    
 
@@ -41,12 +46,14 @@ int main() {
     ComplexNumber_C& refQ = q;
     refQ.real = 33.0;
     refQ.imag = 66.0;
+    printf("6\n");
     printf("p = %f + j%f\n", p.real, p.imag);
     printf("q = %f + j%f\n", q.real, q.imag);   
 
     // 5 - Converting a C pointer to a C++ reference
     ComplexNumber_C& nice_ptr = *ptrP;
     nice_ptr = {5.0, 6.0};
+    printf("7\n");
     printf("p = %f + j%f\n", p.real, p.imag);
     printf("q = %f + j%f\n", q.real, q.imag);      
     

@@ -17,7 +17,7 @@ int main()
 {
     //Time how long it takes to perform a printf
     tmr1.start();
-    printf("Hello World!\n");
+    printf("Hello World, how are you!\n");
     tmr1.stop();
 
     //Print out how long it took
@@ -36,6 +36,12 @@ int main()
         //Wait for 500ms
         tmr1.reset();
         while (tmr1.elapsed_time() < 500ms); //How about this for C++ magic :)
+
+        //Wait for release
+        while(SW_BLUE == 1);
+
+        //Wait for noise to go away
+        while(tmr1.elapsed_time() < 500ms);
 
         wait_us(500000);
 

@@ -12,6 +12,7 @@ DigitalOut ledGrn(TRAF_GRN1_PIN);
 
 // Timers (modified version from Timer)
 TimerCompat tmr_flash;
+TimerCompat tmr_debounce;
 
 // THE CODE BELOW IS NOT A SOLUTION
 //
@@ -21,27 +22,31 @@ TimerCompat tmr_flash;
 
 int main()
 {
-    //Start flashing timer
+    //Starting all timer
     tmr_flash.start();
+    tmr_debounce.start();
+    
+    bool switchState = false;
 
-    while (true) {
+    while (true) {       
 
-        //Wait for switch press and release (by BLOCKING)
-        while (SW2.read() == 0);
-        ledRed = !ledRed;
-        wait_us(300000);
+        //Reading the switch state
+        bool sw2Pressed = (SW2.read() == 1);
 
-        while (SW2.read() == 1);
-        wait_us(300000);        
+        //Debouncing the swtich
+        if (tmr_flash.read_ms() >= 500){
+            if(sw2Pressed != switchState){
+                switchState = sw2Pressed;
+                tmr_debounce.reset();
+            }
+        }
 
-        //Toggle Yellow LED
-        ledYel = !ledYel;
-        while (tmr_flash.read_ms() < 500);
-        tmr_flash.reset();
+        ledRed = switchState;
+        
+        //Reading if the timer has surpassed a certain time and switch the LED on and off 
+        if (tmr_flash.read_ms() >= 500){
+            ledYel = !ledYel;
+            tmr_flash.reset();
+        }
     }
 }
-
-
-
-
-
